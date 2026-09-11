@@ -11,6 +11,10 @@ simplement son `index.html`.
   mobilier sur mesure, pose de parquet, escaliers, rénovation charpente.
 - `agriculteur/` — Ferme des Trois Chênes (Normandie) — palette verte, produits :
   fruits & légumes, paniers fermiers, produits laitiers, visite de la ferme.
+- `boulanger/` — Boulangerie du Vieux Port (Marseille) — palette ambre/brun, produits :
+  pains artisanaux, viennoiseries, pâtisseries, commandes spéciales.
+- `coiffeur/` — Aurélie Coiffure (Bordeaux) — palette rose/bordeaux, prestations :
+  coupe & brushing, coloration, soins capillaires, coiffure événementielle.
 
 ## Pour un nouveau client dans ces métiers
 
@@ -20,5 +24,5 @@ simplement son `index.html`.
 3. Ajustez les couleurs dans le bloc `:root` de `style.css` si besoin.
 4. Mettez à jour l'iframe Google Maps dans la section `#location`.
 
-Pour un métier non couvert ici (boulangerie, coiffeur, restaurant...), partez
+Pour un métier non couvert ici (restaurant, fleuriste, garagiste...), partez
 du template de base à la racine du dépôt et suivez le même processus.
