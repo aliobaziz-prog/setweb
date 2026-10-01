@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0f766e">
-  <meta name="description" content="Vital 40+ — food diary, blood sugar, blood pressure and cholesterol tracker for adults over 40. Private: your data stays on your device.">
+  <meta name="description" content="Vital 40+ — snap a photo of your meal, see its nutrients and get portion tips for blood sugar, blood pressure and cholesterol.">
   <title>Vital 40+</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -21,7 +21,21 @@
   </header>
 
   <main id="app">
-    <section id="tab-home" class="tab active"><div id="home"></div></section>
+    <section id="tab-home" class="tab active">
+      <div class="card scan">
+        <h2 data-i18n="scan.title"></h2>
+        <p class="small" data-i18n="scan.intro"></p>
+        <label class="btn big"><span data-i18n="scan.camera"></span><input id="cam-input" type="file" accept="image/*" capture="environment" hidden></label>
+        <div class="btnrow">
+          <label class="btn alt"><span data-i18n="scan.gallery"></span><input id="gal-input" type="file" accept="image/*" hidden></label>
+          <button id="search-btn" class="btn alt" type="button" data-i18n="scan.search"></button>
+        </div>
+        <div id="scan-busy" class="busy" hidden><span class="spinner"></span><span data-i18n="scan.busy"></span></div>
+        <p id="scan-msg" class="small" aria-live="polite"></p>
+      </div>
+      <div id="scan-result"></div>
+      <div id="home-extra"></div>
+    </section>
 
     <section id="tab-food" class="tab">
       <nav class="subnav" data-tab="food">
@@ -71,36 +85,12 @@
       </div>
     </section>
 
-    <section id="tab-track" class="tab">
-      <nav class="subnav" data-tab="track">
-        <button data-s="readings" class="on" data-i18n="sub.readings"></button>
-        <button data-s="goals" data-i18n="sub.goals"></button>
+    <section id="tab-habits" class="tab">
+      <nav class="subnav" data-tab="habits">
+        <button data-s="goals" class="on" data-i18n="sub.goals"></button>
+        <button data-s="sport" data-i18n="sub.sport"></button>
       </nav>
-      <div class="sub active" id="sub-track-readings">
-        <form id="rform" class="card">
-          <h2 data-i18n="rform.title"></h2>
-          <div class="grid">
-            <label><span data-i18n="rform.type"></span><select id="rtype"></select></label>
-            <label id="l-ctx"><span data-i18n="rform.ctx"></span>
-              <select id="rctx">
-                <option value="fasting" data-i18n="ctx.fasting"></option>
-                <option value="before" data-i18n="ctx.before"></option>
-                <option value="after" data-i18n="ctx.after"></option>
-                <option value="bed" data-i18n="ctx.bed"></option>
-                <option value="random" data-i18n="ctx.random"></option>
-              </select></label>
-            <label><span id="lv-t"></span><input id="rv" type="number" step="any" inputmode="decimal" required></label>
-            <label id="l-v2" hidden><span data-i18n="rform.dia"></span><input id="rv2" type="number" inputmode="numeric"></label>
-            <label id="l-pulse" hidden><span data-i18n="rform.pulse"></span><input id="rpulse" type="number" inputmode="numeric"></label>
-            <label><span data-i18n="rform.date"></span><input id="rdate" type="date"></label>
-          </div>
-          <button class="btn" type="submit" data-i18n="btn.save"></button>
-          <p id="rmsg" class="small" aria-live="polite"></p>
-        </form>
-        <div id="rchips" class="chips"></div>
-        <div id="rview"></div>
-      </div>
-      <div class="sub" id="sub-track-goals">
+      <div class="sub active" id="sub-habits-goals">
         <div class="card">
           <h2 data-i18n="goals.title"></h2>
           <ul id="checks" class="checks"></ul>
@@ -108,30 +98,28 @@
           <p id="streak" class="small"></p>
         </div>
       </div>
-    </section>
-
-    <section id="tab-sport" class="tab">
-      <div class="card">
-        <h2 data-i18n="sport.week"></h2>
-        <table><tbody id="week"></tbody></table>
+      <div class="sub" id="sub-habits-sport">
+        <div class="card">
+          <h2 data-i18n="sport.week"></h2>
+          <table><tbody id="week"></tbody></table>
+        </div>
+        <div id="sport-warn" class="card warn"></div>
+        <div id="sport-list"></div>
       </div>
-      <div id="sport-warn" class="card warn"></div>
-      <div id="sport-list"></div>
     </section>
 
     <section id="tab-more" class="tab">
       <nav class="subnav" data-tab="more">
         <button data-s="profile" class="on" data-i18n="sub.profile"></button>
-        <button data-s="risk" data-i18n="sub.risk"></button>
-        <button data-s="meds" data-i18n="sub.meds"></button>
-        <button data-s="report" data-i18n="sub.report"></button>
-        <button data-s="ramadan" data-i18n="sub.fasting"></button>
         <button data-s="data" data-i18n="sub.data"></button>
       </nav>
 
       <div class="sub active" id="sub-more-profile">
         <div class="card">
           <h2 data-i18n="profile.title"></h2>
+          <h3 data-i18n="cond.title"></h3>
+          <div id="conditions" class="chips"></div>
+          <p class="small" data-i18n="cond.note"></p>
           <div class="grid">
             <label><span data-i18n="p.age"></span><input id="p-age" type="number" min="18" max="100" inputmode="numeric"></label>
             <label><span data-i18n="p.sex"></span><select id="p-sex"><option value="m" data-i18n="sex.m"></option><option value="f" data-i18n="sex.f"></option></select></label>
@@ -142,13 +130,9 @@
               <select id="p-activity"><option value="low" data-i18n="act.low"></option><option value="mid" data-i18n="act.mid"></option><option value="high" data-i18n="act.high"></option></select></label>
             <label><span data-i18n="p.goal"></span>
               <select id="p-goal"><option value="keep" data-i18n="goal.keep"></option><option value="lose" data-i18n="goal.lose"></option></select></label>
-            <label><span data-i18n="p.units"></span>
-              <select id="p-units"><option value="mgdl" data-i18n="u.mgdl"></option><option value="mmol" data-i18n="u.mmol"></option><option value="gl" data-i18n="u.gl"></option></select></label>
             <label><span data-i18n="p.system"></span>
               <select id="p-system"><option value="metric" data-i18n="sys.metric"></option><option value="imperial" data-i18n="sys.imperial"></option></select></label>
           </div>
-          <h3 data-i18n="cond.title"></h3>
-          <div id="conditions" class="chips"></div>
           <div id="bmi" class="bmi"></div>
         </div>
         <div class="card">
@@ -156,55 +140,6 @@
           <ul id="targets" class="kv"></ul>
           <p class="small" data-i18n="targets.note"></p>
         </div>
-        <div class="card">
-          <h2 data-i18n="ref.title"></h2>
-          <table><tbody id="ref"></tbody></table>
-          <p class="small" data-i18n="ref.note"></p>
-        </div>
-      </div>
-
-      <div class="sub" id="sub-more-risk">
-        <div class="card">
-          <h2 data-i18n="risk.title"></h2>
-          <p class="small" data-i18n="risk.intro"></p>
-          <div class="grid one">
-            <label><span data-i18n="r.act"></span><select id="r-act"></select></label>
-            <label><span data-i18n="r.veg"></span><select id="r-veg"></select></label>
-            <label><span data-i18n="r.meds"></span><select id="r-meds"></select></label>
-            <label><span data-i18n="r.hg"></span><select id="r-hg"></select></label>
-            <label><span data-i18n="r.fam"></span><select id="r-fam"></select></label>
-          </div>
-          <button id="risk-go" class="btn" type="button" data-i18n="risk.go"></button>
-          <div id="risk-out" class="risk" aria-live="polite"></div>
-        </div>
-      </div>
-
-      <div class="sub" id="sub-more-meds">
-        <form id="mform" class="card">
-          <h2 data-i18n="meds.title"></h2>
-          <div class="grid">
-            <label><span data-i18n="m.name"></span><input id="m-name" type="text" maxlength="60" required></label>
-            <label><span data-i18n="m.dose"></span><input id="m-dose" type="text" maxlength="40"></label>
-            <label><span data-i18n="m.time"></span><input id="m-time" type="time" value="08:00"></label>
-          </div>
-          <button class="btn" type="submit" data-i18n="btn.add"></button>
-          <button id="notif-btn" class="btn alt" type="button" hidden data-i18n="meds.notifbtn"></button>
-          <p class="small" data-i18n="meds.note"></p>
-        </form>
-        <div class="card">
-          <h2 data-i18n="meds.today"></h2>
-          <ul id="medlist" class="mlist"></ul>
-        </div>
-      </div>
-
-      <div class="sub" id="sub-more-report">
-        <div class="card" id="report"></div>
-        <button id="print-btn" class="btn no-print" type="button" data-i18n="rep.print"></button>
-      </div>
-
-      <div class="sub" id="sub-more-ramadan">
-        <p class="small" data-i18n="fast.intro"></p>
-        <div id="ramadan"></div>
       </div>
 
       <div class="sub" id="sub-more-data">
@@ -212,6 +147,7 @@
           <h2 data-i18n="data.title"></h2>
           <ul>
             <li data-i18n="data.p1"></li>
+            <li data-i18n="data.photo"></li>
             <li data-i18n="data.p2"></li>
             <li data-i18n="data.p3"></li>
           </ul>
@@ -226,13 +162,12 @@
           <h2 data-i18n="src.title"></h2>
           <p class="small" data-i18n="src.intro"></p>
           <ul class="small">
-            <li>American Diabetes Association — Standards of Care in Diabetes</li>
-            <li>ACC/AHA — Guideline for High Blood Pressure in Adults; Guideline on the Management of Blood Cholesterol</li>
-            <li>ESC/EAS — Guidelines for the Management of Dyslipidaemias</li>
             <li>WHO — Guidelines on sodium and sugars intake</li>
-            <li>FINDRISC — Finnish Diabetes Risk Score (Lindström &amp; Tuomilehto, Diabetes Care 2003)</li>
-            <li>IDF-DAR — Diabetes and Ramadan Practical Guidelines</li>
+            <li>Dietary Guidelines for Americans 2020–2025 (USDA/HHS)</li>
+            <li>American Heart Association — DASH eating plan</li>
+            <li>American Diabetes Association — Diabetes Plate Method</li>
             <li>USDA FoodData Central — nutrient values (approximate)</li>
+            <li data-i18n="src.ai"></li>
           </ul>
         </div>
       </div>
@@ -242,10 +177,9 @@
   </main>
 
   <nav class="tabs">
-    <button data-t="home" class="on"><span>🏠</span><i data-i18n="nav.home"></i></button>
+    <button data-t="home" class="on"><span>📷</span><i data-i18n="nav.home"></i></button>
     <button data-t="food"><span>🍎</span><i data-i18n="nav.food"></i></button>
-    <button data-t="track"><span>📈</span><i data-i18n="nav.track"></i></button>
-    <button data-t="sport"><span>🏃</span><i data-i18n="nav.sport"></i></button>
+    <button data-t="habits"><span>🏃</span><i data-i18n="nav.habits"></i></button>
     <button data-t="more"><span>☰</span><i data-i18n="nav.more"></i></button>
   </nav>
 
@@ -258,8 +192,9 @@
   <script src="foods.js"></script>
   <script src="core.js"></script>
   <script src="food-views.js"></script>
-  <script src="track-views.js"></script>
+  <script src="habits.js"></script>
   <script src="more-views.js"></script>
-  <script src="home.js"></script>
+  <script src="advice.js"></script>
+  <script src="scan.js"></script>
 </body>
 </html>

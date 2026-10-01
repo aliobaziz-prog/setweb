@@ -1,0 +1,17 @@
+{
+  "name": "vital40",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Vital 40+ — snap a meal photo, get its nutrients and portion advice.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "zod": "^4.6.5"
+  }
+}

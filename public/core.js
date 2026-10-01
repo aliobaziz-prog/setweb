@@ -24,9 +24,7 @@ const pad = (n) => String(n).padStart(2, "0");
 const dkey = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 const todayKey = () => dkey();
 const nf = (x, d = 0) => (LANG === "ar" ? x.toFixed(d) : new Intl.NumberFormat(LOCALE, { minimumFractionDigits: d, maximumFractionDigits: d }).format(x));
-const fmtD = (ts) => new Intl.DateTimeFormat(LOCALE, { day: "numeric", month: "short" }).format(new Date(ts));
 const fmtDay = (key) => new Intl.DateTimeFormat(LOCALE, { weekday: "short", day: "numeric", month: "short" }).format(new Date(key + "T12:00:00"));
-const fmtLong = (d) => new Intl.DateTimeFormat(LOCALE, { dateStyle: "long" }).format(d);
 const sum = (a) => a.reduce((x, y) => x + y, 0);
 const avg = (a) => (a.length ? sum(a) / a.length : 0);
 const norm = (s) => s.normalize("NFD").replace(/[̀-ًͯ-ٰٟ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").toLowerCase();
@@ -36,10 +34,7 @@ const funit = (f) => (f.u ? SERVINGS[f.u][LIDX] : f.unit);
 /* ---------- profile & units ---------- */
 function defaultUnits() {
   const l = navigator.language || "en-US";
-  if (/^en(-US)?$/i.test(l)) return { units: "mgdl", system: "imperial" };
-  if (/^fr/i.test(l) && !/-CA$/i.test(l)) return { units: "gl", system: "metric" };
-  if (LANG === "ar") return { units: "gl", system: "metric" };
-  return { units: "mmol", system: "metric" };
+  return { system: /^en(-US)?$/i.test(l) ? "imperial" : "metric" };
 }
 const DEFAULT_PROFILE = { age: "", sex: "m", weight: "", height: "", waist: "", activity: "low", goal: "keep", conds: [], ...defaultUnits() };
 let profile = { ...DEFAULT_PROFILE, ...store.get("profile", {}) };
@@ -53,6 +48,7 @@ const kgIn = (v) => (IMP() ? v * LB : v);
 const cmOut = (cm) => (IMP() ? cm / IN : cm);
 const cmIn = (v) => (IMP() ? v * IN : v);
 const wUnit = () => t(IMP() ? "u.lb" : "u.kg");
+const fmtGrams = (g) => `${nf(Math.round(g))} ${t("u.g")}` + (IMP() ? ` (${nf(g / 28.3495, 1)} oz)` : "");
 const lUnit = () => t(IMP() ? "u.in" : "u.cm");
 
 function bmiValue() {
@@ -152,89 +148,6 @@ function renderMeters(box, totals, keys) {
     );
   });
 }
-
-/* ---------- readings: units & status ---------- */
-const RTYPES = {
-  glucose: { emoji: "🩸", mg: true },
-  bp: { emoji: "❤️" },
-  weight: { emoji: "⚖️" },
-  a1c: { emoji: "🧪" },
-  ldl: { emoji: "🧈", mg: true },
-  hdl: { emoji: "💚", mg: true },
-  tc: { emoji: "🧪", mg: true },
-  tg: { emoji: "🧪", mg: true },
-};
-const rlabel = (k) => t("rt." + k);
-const MMOL = { glucose: 18.016, ldl: 38.67, hdl: 38.67, tc: 38.67, tg: 88.57 };
-function mgFactor(type) {
-  if (profile.units === "gl") return 100;
-  if (profile.units === "mmol") return MMOL[type];
-  return 1;
-}
-function toDisplay(type, v) {
-  if (RTYPES[type].mg) return v / mgFactor(type);
-  if (type === "weight") return kgOut(v);
-  return v;
-}
-function fromInput(type, v) {
-  if (RTYPES[type].mg) return v * mgFactor(type);
-  if (type === "weight") return kgIn(v);
-  return v;
-}
-function fmtVal(type, v) {
-  const d = toDisplay(type, v);
-  if (RTYPES[type].mg) return nf(d, { gl: 2, mmol: 1, mgdl: 0 }[profile.units]);
-  if (type === "weight" || type === "a1c") return nf(d, 1);
-  return nf(d);
-}
-function unitOf(type) {
-  if (RTYPES[type].mg) return t("u." + profile.units);
-  if (type === "weight") return wUnit();
-  return { bp: "mmHg", a1c: "%" }[type];
-}
-function fmtReading(r) {
-  return r.type === "bp" ? `${Math.round(r.v)}/${Math.round(r.v2)} mmHg` : `${fmtVal(r.type, r.v)} ${unitOf(r.type)}`;
-}
-
-const S = (cls, key) => ({ cls, label: key ? t("st." + key) : "" });
-function statusOf(r) {
-  const v = r.v;
-  const diab = has("diabetes");
-  switch (r.type) {
-    case "glucose": {
-      if (v < 70) return S("low", "low");
-      const fastingLike = r.ctx === "fasting" || r.ctx === "before";
-      if (diab) {
-        const hi = fastingLike ? 130 : 180;
-        return v <= hi ? S("ok", "target") : v <= hi + 50 ? S("warn", "slhigh") : S("bad", "high");
-      }
-      if (fastingLike) return v < 100 ? S("ok", "normal") : v < 126 ? S("warn", "slhigh") : S("bad", "high");
-      return v < 140 ? S("ok", "normal") : v < 200 ? S("warn", "slhigh") : S("bad", "high");
-    }
-    case "bp": {
-      const d = r.v2;
-      if (v >= 180 || d >= 120) return S("bad", "vhigh");
-      if (v >= 140 || d >= 90) return S("bad", "high");
-      if (v >= 130 || d >= 80) return S("warn", "slhigh");
-      if (v < 90 || d < 60) return S("low", "low");
-      return v >= 120 ? S("warn", "elevated") : S("ok", "optimal");
-    }
-    case "a1c":
-      if (diab) return v < 7 ? S("ok", "target") : v < 8 ? S("warn", "slhigh") : S("bad", "high");
-      return v < 5.7 ? S("ok", "normal") : v < 6.5 ? S("warn", "prediab") : S("bad", "diabrange");
-    case "ldl": return v < 130 ? S("ok", v < 100 ? "optimal" : "acceptable") : v < 160 ? S("warn", "borderline") : S("bad", "high");
-    case "hdl": {
-      const low = profile.sex === "m" ? 40 : 50;
-      return v < low ? S("warn", "low") : S("ok", v >= 60 ? "vgood" : "good");
-    }
-    case "tc": return v < 200 ? S("ok", "desirable") : v < 240 ? S("warn", "borderline") : S("bad", "high");
-    case "tg": return v < 150 ? S("ok", "normal") : v < 200 ? S("warn", "borderline") : S("bad", "high");
-    default: return S("neutral");
-  }
-}
-
-const getReadings = () => store.get("readings", []).sort((a, b) => a.ts - b.ts);
-const latest = (type) => getReadings().filter((r) => r.type === type).pop();
 
 /* ---------- daily goals ---------- */
 const checksToday = () => (store.get("checks", {})[todayKey()] || {});

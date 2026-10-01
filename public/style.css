@@ -162,3 +162,27 @@ dialog input[type=search], dialog input[type=text], dialog label input { width: 
 .filebtn { display: inline-flex; flex-direction: row; font-size: 1rem; color: var(--brand); cursor: pointer; }
 .btn.danger { background: var(--avoid); }
 @media (prefers-color-scheme: dark) { .btn.danger { color: #fff; } }
+
+/* ---------- v4: scan & advice ---------- */
+label.btn { flex-direction: row; justify-content: center; align-items: center; color: #fff; font-size: 1rem; cursor: pointer; }
+label.btn.alt { color: var(--brand); }
+@media (prefers-color-scheme: dark) { label.btn:not(.alt) { color: #04201d; } }
+.btn.big { display: flex; width: 100%; padding: 16px; font-size: 1.15rem; margin-top: 12px; }
+.scan .btnrow .btn { flex: 1; }
+.busy { display: flex; align-items: center; gap: 10px; margin-top: 12px; color: var(--muted); }
+.spinner { width: 20px; height: 20px; border: 3px solid var(--line); border-top-color: var(--brand); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.thumb { display: block; width: 100%; max-height: 220px; object-fit: cover; border-radius: 12px; margin: 6px 0 4px; }
+.fooditem { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; }
+.itemhead { display: flex; align-items: center; gap: 6px; }
+.itemhead input { width: 78px; padding: 6px 8px; }
+.facts { margin: 4px 0 8px; font-size: .82rem; color: var(--muted); }
+.advice { display: grid; gap: 8px; }
+.adv { border-inline-start: 4px solid var(--c); background: var(--bg); border-radius: 10px; padding: 8px 10px; }
+.adv p { margin: 3px 0 0; font-size: .9rem; }
+.advhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-weight: 600; font-size: .9rem; }
+.lv-good { --c: var(--good); } .lv-limit { --c: var(--limit); } .lv-occasional { --c: var(--avoid); }
+.mealsum { margin: 14px 0 6px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--c); }
+.mealsum p { margin: 4px 0 0; }
+.conf-high { --c: var(--good); } .conf-medium { --c: var(--limit); } .conf-low { --c: var(--avoid); }
+.analysis .btnrow select { flex: 1; margin-top: 8px; }

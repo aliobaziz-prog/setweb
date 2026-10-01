@@ -21,7 +21,7 @@ CONTENT.en = (() => {
       ],
     },
     bp: {
-      label: "Blood pressure",
+      label: "Blood pressure & salt",
       emoji: "❤️",
       tips: [
         "Keep sodium under 2,000 mg a day (about 5 g of salt) — ideally 1,500 mg if your blood pressure is high.",
@@ -31,7 +31,7 @@ CONTENT.en = (() => {
       ],
     },
     diabetes: {
-      label: "Diabetes / blood sugar",
+      label: "Blood sugar",
       emoji: "🍬",
       tips: [
         "Eat 3 regular meals — avoid long gaps followed by a big meal.",
@@ -42,11 +42,10 @@ CONTENT.en = (() => {
       ],
     },
     thyroid: {
-      label: "Thyroid / hormones",
+      label: "Thyroid",
       emoji: "🦋",
       tips: [
-        "If you take thyroid medication (levothyroxine), take it on an empty stomach and wait 30–60 minutes before eating.",
-        "Keep calcium and iron supplements at least 4 hours away from your dose.",
+        "If you take thyroid medication, ask your pharmacist how to time it around meals and supplements.",
         "Soy and cruciferous vegetables (cabbage, cauliflower, broccoli) are fine cooked and in normal amounts.",
         "Thyroid problems affect weight and energy — follow up regularly with your doctor.",
       ],
@@ -148,16 +147,6 @@ CONTENT.en = (() => {
     thyroid: "Thyroid: start gradually — fatigue is common when hormones are off balance.",
   };
 
-  const REFERENCE = [
-    ["Total cholesterol", "Below 200 mg/dL (5.2 mmol/L)"],
-    ["LDL (bad)", "Below 100–130 mg/dL (2.6–3.4 mmol/L) depending on your risk"],
-    ["HDL (good)", "Above 40 mg/dL (1.0 mmol/L) men, 50 mg/dL (1.3 mmol/L) women"],
-    ["Triglycerides", "Below 150 mg/dL (1.7 mmol/L)"],
-    ["Blood pressure", "Below 130/80 mmHg (common target)"],
-    ["Fasting glucose", "70–99 mg/dL (3.9–5.5 mmol/L) normal; 126+ (7.0+) = diabetes"],
-    ["HbA1c", "Below 5.7% normal; 7% is a common target with diabetes"],
-    ["Body mass index", "18.5–24.9 normal"],
-  ];
 
   const LESSONS = [
     { t: "Why does blood sugar rise after eating?", b: "Carbohydrates (bread, rice, pasta, sweets) turn into blood sugar. Eating them with vegetables, protein and fiber slows the rise — and a 10-minute walk after the meal lowers it further." },
@@ -177,30 +166,7 @@ CONTENT.en = (() => {
     { t: "Eat slowly", b: "Feeling full takes about 20 minutes. Put your fork down between bites and avoid eating in front of a screen." },
   ];
 
-  const RAMADAN = {
-    warn: [
-      "See your doctor at least a month before fasting to adjust medication — never change insulin or tablet doses on your own.",
-      "Fasting without medical supervision is not advised if you use insulin, have kidney disease, are pregnant, or have diabetes complications.",
-      "Break your fast immediately if blood sugar falls below 70 mg/dL (3.9 mmol/L) or rises above 300 mg/dL (16.7 mmol/L), or if you feel dizzy, sweaty or shaky.",
-      "Checking your blood sugar does not break the fast — check midday, before iftar and 2 hours after.",
-    ],
-    iftar: ["1–3 dates + water", "A light soup (low-salt lentil or vegetable)", "Pause, then a main plate: grilled fish or chicken + vegetables + a quarter plate of whole grains", "Dessert? One small piece after the meal — not several fried sweets"],
-    suhoor: ["Oatmeal with milk, or eggs + whole-grain bread + vegetables", "Plain yogurt + a handful of almonds + fruit", "Eat suhoor as late as possible, with two glasses of water"],
-    tips: [
-      "Drink 8 glasses of water between iftar and suhoor.",
-      "Walk 30 minutes about an hour after iftar; avoid hard exercise just before breaking the fast.",
-      "Go easy on salt at suhoor so you're not thirsty during the day (no pickles or salty cheese).",
-      "Avoid fried food, sweet drinks and lots of sweets at iftar.",
-    ],
-  };
 
-  const FIND_OPTS = {
-    act: [["Yes, 30 minutes a day or more", 0], ["No", 2]],
-    veg: [["Every day", 0], ["Not every day", 1]],
-    meds: [["No", 0], ["Yes", 2]],
-    hg: [["No", 0], ["Yes (in a check-up, during illness or pregnancy)", 5]],
-    fam: [["No", 0], ["Grandparent, aunt, uncle or first cousin", 3], ["Parent, brother, sister or child", 5]],
-  };
 
   const DAILY_CHECKS = [
     { id: "water", label: "Drank 8 glasses of water 💧" },
@@ -220,5 +186,5 @@ CONTENT.en = (() => {
     "Choose your conditions in More → My profile to get personalized advice and food lists.",
   ];
 
-  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, REFERENCE, LESSONS, RAMADAN, FIND_OPTS, DAILY_CHECKS, GENERAL_TIPS };
+  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
 })();

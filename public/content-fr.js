@@ -21,7 +21,7 @@ CONTENT.fr = (() => {
       ],
     },
     bp: {
-      label: "Tension artérielle",
+      label: "Tension & sel",
       emoji: "❤️",
       tips: [
         "Moins de 2 000 mg de sodium par jour (environ 5 g de sel) — idéalement 1 500 mg en cas d'hypertension.",
@@ -31,7 +31,7 @@ CONTENT.fr = (() => {
       ],
     },
     diabetes: {
-      label: "Diabète / glycémie",
+      label: "Glycémie",
       emoji: "🍬",
       tips: [
         "Prenez 3 repas réguliers — évitez les longues périodes sans manger suivies d'un gros repas.",
@@ -42,11 +42,10 @@ CONTENT.fr = (() => {
       ],
     },
     thyroid: {
-      label: "Thyroïde / hormones",
+      label: "Thyroïde",
       emoji: "🦋",
       tips: [
-        "Si vous prenez un traitement thyroïdien (lévothyroxine), prenez-le à jeun et attendez 30 à 60 minutes avant de manger.",
-        "Espacez d'au moins 4 heures les compléments de calcium et de fer.",
+        "Si vous prenez un traitement pour la thyroïde, demandez à votre pharmacien comment l'espacer des repas et des compléments.",
         "Le soja et les crucifères (chou, chou-fleur, brocoli) sont sans problème cuits et en quantité normale.",
         "La thyroïde influence le poids et l'énergie : faites un suivi régulier avec votre médecin.",
       ],
@@ -148,16 +147,6 @@ CONTENT.fr = (() => {
     thyroid: "Thyroïde : commencez progressivement, la fatigue est fréquente en cas de déséquilibre hormonal.",
   };
 
-  const REFERENCE = [
-    ["Cholestérol total", "Moins de 2 g/L (5,2 mmol/L)"],
-    ["LDL (mauvais)", "Moins de 1 à 1,3 g/L (2,6–3,4 mmol/L) selon votre risque"],
-    ["HDL (bon)", "Plus de 0,4 g/L (1,0 mmol/L) hommes, 0,5 g/L (1,3 mmol/L) femmes"],
-    ["Triglycérides", "Moins de 1,5 g/L (1,7 mmol/L)"],
-    ["Tension artérielle", "Moins de 130/80 mmHg (objectif courant)"],
-    ["Glycémie à jeun", "0,70–0,99 g/L (3,9–5,5 mmol/L) normale ; 1,26 g/L (7,0) ou plus = diabète"],
-    ["HbA1c", "Moins de 5,7 % normal ; 7 % objectif courant en cas de diabète"],
-    ["Indice de masse corporelle", "18,5–24,9 normal"],
-  ];
 
   const LESSONS = [
     { t: "Pourquoi la glycémie monte-t-elle après le repas ?", b: "Les glucides (pain, riz, pâtes, sucreries) se transforment en sucre dans le sang. Les manger avec des légumes, des protéines et des fibres ralentit la hausse, et 10 minutes de marche après le repas la font baisser." },
@@ -177,30 +166,7 @@ CONTENT.fr = (() => {
     { t: "Mangez lentement", b: "La satiété arrive après environ 20 minutes. Posez la fourchette entre les bouchées et évitez de manger devant un écran." },
   ];
 
-  const RAMADAN = {
-    warn: [
-      "Consultez votre médecin au moins un mois avant le jeûne pour adapter le traitement — ne modifiez jamais seul vos doses d'insuline ou de comprimés.",
-      "Le jeûne sans suivi médical est déconseillé sous insuline, en cas de maladie rénale, de grossesse ou de complications du diabète.",
-      "Rompez le jeûne immédiatement si la glycémie descend sous 0,70 g/L (3,9 mmol/L) ou dépasse 3 g/L (16,7 mmol/L), ou en cas de malaise, sueurs ou tremblements.",
-      "Mesurer sa glycémie ne rompt pas le jeûne : contrôlez à midi, avant l'iftar et 2 heures après.",
-    ],
-    iftar: ["1 à 3 dattes + de l'eau", "Une soupe légère (lentilles ou légumes, peu salée)", "Une pause, puis le plat : poisson ou poulet grillé + légumes + un quart d'assiette de céréales complètes", "Un dessert ? Une petite part après le repas — pas plusieurs pâtisseries frites"],
-    suhoor: ["Flocons d'avoine au lait, ou œufs + pain complet + légumes", "Yaourt nature + une poignée d'amandes + un fruit", "Prenez le suhoor le plus tard possible, avec deux verres d'eau"],
-    tips: [
-      "Buvez 8 verres d'eau entre l'iftar et le suhoor.",
-      "Marchez 30 minutes environ une heure après l'iftar ; évitez l'effort intense juste avant la rupture du jeûne.",
-      "Peu de sel au suhoor pour ne pas avoir soif la journée (pas de cornichons ni de fromage salé).",
-      "Évitez fritures, boissons sucrées et excès de pâtisseries à l'iftar.",
-    ],
-  };
 
-  const FIND_OPTS = {
-    act: [["Oui, 30 minutes par jour ou plus", 0], ["Non", 2]],
-    veg: [["Tous les jours", 0], ["Pas tous les jours", 1]],
-    meds: [["Non", 0], ["Oui", 2]],
-    hg: [["Non", 0], ["Oui (lors d'un bilan, d'une maladie ou d'une grossesse)", 5]],
-    fam: [["Non", 0], ["Grand-parent, oncle, tante ou cousin germain", 3], ["Parent, frère, sœur ou enfant", 5]],
-  };
 
   const DAILY_CHECKS = [
     { id: "water", label: "J'ai bu 8 verres d'eau 💧" },
@@ -220,5 +186,5 @@ CONTENT.fr = (() => {
     "Choisissez vos problèmes de santé dans Plus → Mon profil pour des conseils et listes personnalisés.",
   ];
 
-  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, REFERENCE, LESSONS, RAMADAN, FIND_OPTS, DAILY_CHECKS, GENERAL_TIPS };
+  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
 })();

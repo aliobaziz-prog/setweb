@@ -87,7 +87,7 @@ function addEntry(date, meal, food, qty) {
   renderAll();
 }
 
-function openFoodPicker(meal) {
+function openFoodPicker(meal, onPick) {
   const search = el("input", { type: "search", placeholder: t("pick.search") });
   const list = el("ul", { className: "picker" });
   const draw = () => {
@@ -104,17 +104,17 @@ function openFoodPicker(meal) {
         el("span", { className: "em", textContent: f.emoji }),
         el("span", { className: "grow" }, el("b", { textContent: fname(f) }), el("small", { textContent: `${funit(f)} · ${Math.round(f.n.kcal)} kcal` })));
       foodFlags(f.n).slice(0, 2).forEach(([k, c]) => b.append(el("span", { className: `tag ${c}`, textContent: t(k) })));
-      b.addEventListener("click", () => openQty(meal, f));
+      b.addEventListener("click", () => (onPick ? onPick(f) : openQty(meal, f)));
       list.append(el("li", {}, b));
     });
     if (!foods.length) list.append(el("li", { className: "small", textContent: t("pick.none") }));
   };
   search.addEventListener("input", draw);
   const custom = el("button", { type: "button", className: "btn alt", textContent: t("pick.custom") });
-  custom.addEventListener("click", () => openCustomFood(meal));
+  custom.addEventListener("click", () => openCustomFood(meal, onPick));
   const close = el("button", { type: "button", className: "link", textContent: t("btn.close") });
   close.addEventListener("click", closeDialog);
-  openDialog(el("h2", { textContent: t("pick.title", { meal: mealLabel(meal) }) }), search, list, custom, close);
+  openDialog(el("h2", { textContent: meal ? t("pick.title", { meal: mealLabel(meal) }) : t("pick.titleScan") }), search, list, custom, close);
   draw();
 }
 
@@ -143,7 +143,7 @@ function openQty(meal, food) {
   upd();
 }
 
-function openCustomFood(meal) {
+function openCustomFood(meal, onPick) {
   const name = el("input", { type: "text", placeholder: t("custom.name"), required: true, maxLength: 60 });
   const unit = el("input", { type: "text", placeholder: t("custom.unit"), value: t("custom.unitdef"), maxLength: 40 });
   const fields = {};
@@ -159,10 +159,11 @@ function openCustomFood(meal) {
     NK.forEach((k) => (n[k] = Math.max(0, parseFloat(fields[k].value) || 0)));
     const food = { id: "c" + Date.now(), name: name.value.trim().slice(0, 60), emoji: "🍽️", unit: unit.value.trim().slice(0, 40) || t("custom.unitdef"), n };
     store.set("customFoods", [food, ...store.get("customFoods", [])]);
-    openQty(meal, food);
+    if (onPick) onPick(food);
+    else openQty(meal, food);
   });
   const back = el("button", { type: "button", className: "link", textContent: t("btn.back") });
-  back.addEventListener("click", () => openFoodPicker(meal));
+  back.addEventListener("click", () => openFoodPicker(meal, onPick));
   openDialog(el("h2", { textContent: t("custom.title") }), name, unit, grid, ok, back);
 }
 
@@ -210,7 +211,7 @@ function renderDiary() {
         renderAll();
       });
       ul.append(el("li", {},
-        el("span", { className: "grow", textContent: `${e.emoji} ${entryName(e)} × ${nf(e.qty, e.qty % 1 ? 2 : 0)}` }),
+        el("span", { className: "grow", textContent: `${e.emoji} ${entryName(e)} ${e.amt ? "· " + fmtGrams(e.amt) : "× " + nf(e.qty, e.qty % 1 ? 2 : 0)}` }),
         el("span", { className: "small", textContent: `${nf(Math.round(e.n.kcal))} kcal` }), del));
     });
     card.append(ul);

@@ -1,44 +1,46 @@
 # Vital 40+
 
-A private, multilingual (English · Français · العربية) health app for adults over 40 who want to prevent or manage
-**high cholesterol, high triglycerides, high blood pressure, type 2 diabetes and thyroid problems** through food, exercise and tracking.
+Snap a photo of your meal — Vital 40+ estimates what's in it (calories, net carbs, added sugar, saturated fat,
+sodium, cholesterol, fiber) and suggests a portion that fits your health focus: blood sugar, blood pressure & salt,
+cholesterol, triglycerides or thyroid. Available in English, Français and العربية.
 
-It combines what the leading apps do separately — Cronometer / DASH (nutrient diary), mySugr / Qardio (readings & charts),
-Glooko (doctor report), Noom / Omada (daily lessons) — in one app that handles several conditions at once.
+The app is designed as a **general wellness / healthy-eating tool**: it gives nutrition information and portion tips.
+It does not record or interpret medical readings, diagnose, or give medication advice.
 
 ## Features
-- **Food diary** — 97 foods (American, European, Mediterranean, North African) with calories, carbs, added sugar, saturated fat,
-  sodium, cholesterol and fiber, compared against daily targets personalized to your age, weight, activity and conditions. Custom foods supported.
-- **Readings & labs** — blood sugar, blood pressure, weight, HbA1c, LDL, HDL, total cholesterol, triglycerides. Color-coded ranges
-  (ADA / ACC-AHA / ESC), trend charts, 30-day stats, estimated HbA1c, safety alerts for dangerous readings.
-- **Units** — mg/dL, mmol/L or g/L for labs; kg/cm or lb/in for the body. Defaults follow the user's region (US, UK/EU, France).
-- **What to eat** — eat / limit / avoid lists adapted to the selected conditions; healthy plate; meal ideas.
-- **Exercise** — 8 beginner-friendly exercises, a weekly plan and condition-specific safety notes.
-- **Medications** — schedule, daily check-off and reminders.
-- **Diabetes risk test** — FINDRISC.
-- **Doctor report** — 30-day summary, printable / save as PDF.
-- **Fasting mode** — Ramadan guidance for people with diabetes or high blood pressure.
-- **Privacy by design** — no account, no server, no tracking. Data stays on the device; export / import backup and "delete all my data" (GDPR).
-- Works offline (PWA), installable on phone home screens, light & dark mode.
+- **Meal photo analysis** — Claude (Anthropic) identifies each food, estimates its weight and nutrients.
+  Users can correct the grams; advice updates instantly.
+- **Portion advice per health focus** — e.g. "Blood sugar: net carbs 62 g in this portion — suggested portion about 170 g".
+- **Food search** — 97 common foods (American, European, Mediterranean, North African) when no photo is handy.
+- **Food diary** with daily targets, eat / limit / occasional guide, meal ideas, daily habits, exercise plan, daily tips.
+- **Privacy** — profile and diary stay on the device; photos are sent only for analysis and not stored by the app.
+  Export / import / delete-all (GDPR).
 
-## Run locally
-Static site, no build step:
+## Run it
+Requires Node.js 20+ and an Anthropic API key.
 
 ```
-python3 -m http.server 8000
+npm install
+ANTHROPIC_API_KEY=sk-ant-... npm start
 ```
 
-Then open `http://localhost:8000`.
+Then open `http://localhost:8000`. Optional settings: `PORT`, `RATE_LIMIT_PER_HOUR` (photo analyses per IP, default 30).
+
+Without an API key the app still works — photo analysis shows "not available" and users can search foods instead.
+
+## Deploy
+Any Node host works (Render, Railway, Fly.io, a VPS). Set `ANTHROPIC_API_KEY` as a secret environment variable — never put it in the code.
 
 ## Project layout
-| File | Purpose |
+| Path | Purpose |
 |---|---|
-| `i18n.js` | Language detection and all interface strings (en/fr/ar) |
-| `content-en.js`, `content-fr.js`, `content-ar.js` | Health content per language (advice, food guide, menus, exercises, lessons) |
-| `foods.js` | Nutrient database (names in 3 languages) |
-| `core.js` | Profile, targets, units, status ranges, navigation |
-| `food-views.js`, `track-views.js`, `more-views.js`, `home.js` | Screens |
+| `server.js` | Serves `public/` and the `/api/analyze` endpoint (photo → Claude → structured nutrients), with per-IP rate limiting |
+| `public/scan.js` | Camera / gallery / search, image resizing, API call |
+| `public/advice.js` | Portion advice engine (nutrient caps per health focus) and the result card |
+| `public/i18n.js`, `public/content-*.js` | Interface strings and health content in en / fr / ar |
+| `public/foods.js` | Nutrient database |
+| `public/core.js`, `food-views.js`, `habits.js`, `more-views.js` | Profile, diary, guide, habits, privacy screens |
 
 ## Disclaimer
-Vital 40+ provides general health information and is not a medical device. Nutrient values are approximate.
-It does not replace advice from a doctor or dietitian.
+Vital 40+ gives general nutrition information to support healthy eating. It is not a medical device and does not
+diagnose, treat or replace advice from a doctor or dietitian. Photo estimates are approximate.
