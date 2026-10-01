@@ -1,5 +1,5 @@
-const CACHE = "sehhati-v1";
-const FILES = ["./", "index.html", "style.css", "data.js", "app.js", "manifest.webmanifest", "icon.svg"];
+const CACHE = "sehhati-v2";
+const FILES = ["./", "index.html", "style.css", "data.js", "foods.js", "extra.js", "core.js", "food-views.js", "track-views.js", "more-views.js", "home.js", "manifest.webmanifest", "icon.svg"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)));
