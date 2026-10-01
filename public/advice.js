@@ -61,6 +61,7 @@ function defaultMeal() {
 
 function renderAnalysis() {
   const box = $("#scan-result");
+  if (speakingBtn && box.contains(speakingBtn)) stopSpeaking();
   box.replaceChildren();
   if (!analysis) return;
   const card = el("div", { className: "card analysis" });
@@ -70,7 +71,9 @@ function renderAnalysis() {
   if (analysis.photo) card.append(el("img", { className: "thumb", src: analysis.photo, alt: "" }));
 
   let mealWorst = "good";
+  const speech = [];
   analysis.items.forEach((it, idx) => {
+    speech.push(`${it.name}.`);
     const n = itemN(it);
     const amt = el("input", { type: "number", min: it.grams ? "1" : "0.25", step: it.grams ? "5" : "0.25", value: String(Math.round(it.amount * 100) / 100), inputMode: "decimal", ariaLabel: t("scan.amount") });
     amt.addEventListener("change", () => {
@@ -98,6 +101,7 @@ function renderAnalysis() {
     focusList().forEach((c) => {
       const a = adviseFocus(it, c);
       if (LEVEL_RANK[a.level] > LEVEL_RANK[mealWorst]) mealWorst = a.level;
+      speech.push(`${focusLabel(c)}: ${t("lvl." + a.level)}.`, ...a.lines);
       adv.append(el("div", { className: `adv lv-${a.level}` },
         el("div", { className: "advhead" }, el("span", { textContent: focusLabel(c) }), el("span", { className: "pill", textContent: `${LEVEL_ICON[a.level]} ${t("lvl." + a.level)}` })),
         ...a.lines.map((x) => el("p", { textContent: x }))));
@@ -106,6 +110,8 @@ function renderAnalysis() {
   });
 
   const tot = totalsOf(analysis.items.map((it) => ({ n: itemN(it) })));
+  const vmsg = el("p", { className: "small", ariaLive: "polite" });
+  card.append(listenButton(() => [`${t("scan.verdict." + mealWorst)}.`, ...speech].join("\n"), vmsg), vmsg);
   card.append(el("div", { className: `mealsum lv-${mealWorst}` },
     el("b", { textContent: `${LEVEL_ICON[mealWorst]} ${t("scan.verdict." + mealWorst)}` }),
     el("p", { className: "small", textContent: t("scan.total", { kcal: nf(Math.round(tot.kcal)), net: nf(Math.round(netCarb(tot))), sug: nf(Math.round(tot.sug)), sat: nf(tot.sat, 1), na: nf(Math.round(tot.na)), fib: nf(Math.round(tot.fib)) }) })));

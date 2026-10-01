@@ -186,5 +186,187 @@ CONTENT.en = (() => {
     "Choose your conditions in More → My profile to get personalized advice and food lists.",
   ];
 
-  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
+  const COACH = {
+    "diabetes": {
+      "intro": "To help keep your blood sugar steady, build each meal around vegetables, protein and a small portion of slow carbs — and move a little after you eat.",
+      "day": [
+        [
+          "Breakfast",
+          "Oatmeal (no sugar) with berries and a few walnuts — or 2 eggs with whole-grain toast and tomato"
+        ],
+        [
+          "Lunch",
+          "Grilled chicken or fish, half a plate of vegetables, a quarter plate of brown rice or bulgur"
+        ],
+        [
+          "Snack",
+          "An apple with a small handful of almonds"
+        ],
+        [
+          "Dinner",
+          "Lentil soup and a big salad with olive oil"
+        ]
+      ],
+      "moves": [
+        [
+          "After breakfast",
+          "Walk 10–15 minutes"
+        ],
+        [
+          "After lunch",
+          "Walk 10–15 minutes — it softens the blood-sugar rise"
+        ],
+        [
+          "After dinner",
+          "Walk 10–15 minutes"
+        ],
+        [
+          "3 days a week",
+          "20 minutes of strength: chair squats, wall push-ups, resistance band"
+        ]
+      ]
+    },
+    "trig": {
+      "intro": "Triglycerides respond quickly to less sugar, fewer refined carbs and no alcohol — plus daily cardio.",
+      "day": [
+        [
+          "Breakfast",
+          "Plain Greek yogurt with walnuts and berries"
+        ],
+        [
+          "Lunch",
+          "Salmon or sardines with vegetables and half a cup of quinoa"
+        ],
+        [
+          "Snack",
+          "A handful of unsalted nuts"
+        ],
+        [
+          "Dinner",
+          "Chickpea and vegetable salad with olive oil — water, no dessert"
+        ]
+      ],
+      "moves": [
+        [
+          "Every day",
+          "Brisk walk 30–45 minutes, ideally after your largest meal"
+        ],
+        [
+          "2–3 days a week",
+          "Cycling or swimming, 30 minutes"
+        ],
+        [
+          "Instead of dessert",
+          "A 10-minute walk after dinner"
+        ]
+      ]
+    },
+    "bp": {
+      "intro": "For blood pressure, the DASH approach works: little salt, plenty of vegetables, fruit, beans and low-fat dairy — with regular moderate cardio.",
+      "day": [
+        [
+          "Breakfast",
+          "Oatmeal with banana and low-fat milk"
+        ],
+        [
+          "Lunch",
+          "Home-cooked chicken with spinach and a baked potato — no added salt"
+        ],
+        [
+          "Snack",
+          "Fruit and a few unsalted almonds"
+        ],
+        [
+          "Dinner",
+          "Homemade bean and vegetable soup, low in salt, and plain yogurt"
+        ]
+      ],
+      "moves": [
+        [
+          "Most days",
+          "30 minutes of brisk walking or cycling"
+        ],
+        [
+          "2 days a week",
+          "Light strength training — breathe steadily, no heavy weights"
+        ],
+        [
+          "Every evening",
+          "10 minutes of stretching and slow breathing"
+        ]
+      ]
+    },
+    "chol": {
+      "intro": "To improve cholesterol, swap saturated fat for olive oil, nuts and fish, and add soluble fiber — with 150 minutes of activity a week.",
+      "day": [
+        [
+          "Breakfast",
+          "Oatmeal with grated apple and walnuts"
+        ],
+        [
+          "Lunch",
+          "Lentils or beans with vegetables and a drizzle of olive oil"
+        ],
+        [
+          "Snack",
+          "A handful of almonds"
+        ],
+        [
+          "Dinner",
+          "Baked fish with roasted vegetables and half an avocado"
+        ]
+      ],
+      "moves": [
+        [
+          "5 days a week",
+          "30 minutes of brisk walking or cycling"
+        ],
+        [
+          "2 days a week",
+          "20 minutes of strength training"
+        ],
+        [
+          "After the main meal",
+          "A 15-minute walk"
+        ]
+      ]
+    },
+    "thyroid": {
+      "intro": "With a thyroid condition, aim for balanced, varied meals with enough protein, cooked vegetables and fish — and start exercise gently.",
+      "day": [
+        [
+          "Breakfast",
+          "Eggs with whole-grain bread and a piece of fruit"
+        ],
+        [
+          "Lunch",
+          "Fish with cooked vegetables and rice"
+        ],
+        [
+          "Snack",
+          "Plain yogurt with a small handful of nuts"
+        ],
+        [
+          "Dinner",
+          "Chicken with cooked vegetables and potatoes"
+        ]
+      ],
+      "moves": [
+        [
+          "Every day",
+          "A 20-minute walk, ideally in the morning for energy"
+        ],
+        [
+          "2 days a week",
+          "Light strength training to keep your muscles"
+        ],
+        [
+          "Every evening",
+          "10 minutes of stretching"
+        ]
+      ]
+    }
+  };
+
+  return { COACH, CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
 })();

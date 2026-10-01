@@ -11,6 +11,9 @@ It does not record or interpret medical readings, diagnose, or give medication a
 - **Meal photo analysis** — Claude (Anthropic) identifies each food, estimates its weight and nutrients.
   Users can correct the grams; advice updates instantly.
 - **Portion advice per health focus** — e.g. "Blood sugar: net carbs 62 g in this portion — suggested portion about 170 g".
+- **My plan (talking coach)** — for each health focus: foods to eat more of, limit or keep occasional, a sample day of meals,
+  and exercise timed around meals (e.g. a 10–15 minute walk after each meal for blood sugar). A 🔊 Listen button reads the
+  plan aloud — and the photo results too — using the phone's built-in text-to-speech (free, works offline).
 - **Food search** — 97 common foods (American, European, Mediterranean, North African) when no photo is handy.
 - **Food diary** with daily targets, eat / limit / occasional guide, meal ideas, daily habits, exercise plan, daily tips.
 - **Privacy** — profile and diary stay on the device; photos are sent only for analysis and not stored by the app.
@@ -36,6 +39,7 @@ Any Node host works (Render, Railway, Fly.io, a VPS). Set `ANTHROPIC_API_KEY` as
 |---|---|
 | `server.js` | Serves `public/` and the `/api/analyze` endpoint (photo → Claude → structured nutrients), with per-IP rate limiting |
 | `public/scan.js` | Camera / gallery / search, image resizing, API call |
+| `public/plan.js`, `public/voice.js` | Talking plan per health focus; text-to-speech helper |
 | `public/advice.js` | Portion advice engine (nutrient caps per health focus) and the result card |
 | `public/i18n.js`, `public/content-*.js` | Interface strings and health content in en / fr / ar |
 | `public/foods.js` | Nutrient database |

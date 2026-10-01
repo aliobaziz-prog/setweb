@@ -186,5 +186,187 @@ CONTENT.fr = (() => {
     "Choisissez vos problèmes de santé dans Plus → Mon profil pour des conseils et listes personnalisés.",
   ];
 
-  return { CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
+  const COACH = {
+    "diabetes": {
+      "intro": "Pour garder une glycémie stable, construisez chaque repas autour des légumes, des protéines et d'une petite portion de glucides lents — et bougez un peu après manger.",
+      "day": [
+        [
+          "Petit-déjeuner",
+          "Flocons d'avoine sans sucre, fruits rouges et quelques noix — ou 2 œufs, pain complet et tomate"
+        ],
+        [
+          "Déjeuner",
+          "Poulet ou poisson grillé, une demi-assiette de légumes, un quart d'assiette de riz complet ou de boulgour"
+        ],
+        [
+          "Collation",
+          "Une pomme et une petite poignée d'amandes"
+        ],
+        [
+          "Dîner",
+          "Soupe de lentilles et grande salade à l'huile d'olive"
+        ]
+      ],
+      "moves": [
+        [
+          "Après le petit-déjeuner",
+          "Marcher 10 à 15 minutes"
+        ],
+        [
+          "Après le déjeuner",
+          "Marcher 10 à 15 minutes — cela adoucit la hausse de la glycémie"
+        ],
+        [
+          "Après le dîner",
+          "Marcher 10 à 15 minutes"
+        ],
+        [
+          "3 jours par semaine",
+          "20 minutes de renforcement : squats sur chaise, pompes contre le mur, élastique"
+        ]
+      ]
+    },
+    "trig": {
+      "intro": "Les triglycérides baissent vite avec moins de sucre, moins de glucides raffinés et sans alcool — plus du cardio chaque jour.",
+      "day": [
+        [
+          "Petit-déjeuner",
+          "Yaourt grec nature, noix et fruits rouges"
+        ],
+        [
+          "Déjeuner",
+          "Saumon ou sardines, légumes et une demi-tasse de quinoa"
+        ],
+        [
+          "Collation",
+          "Une poignée de fruits à coque non salés"
+        ],
+        [
+          "Dîner",
+          "Salade de pois chiches et légumes à l'huile d'olive — de l'eau, pas de dessert"
+        ]
+      ],
+      "moves": [
+        [
+          "Chaque jour",
+          "Marche rapide de 30 à 45 minutes, idéalement après le plus gros repas"
+        ],
+        [
+          "2 à 3 jours par semaine",
+          "Vélo ou natation, 30 minutes"
+        ],
+        [
+          "À la place du dessert",
+          "10 minutes de marche après le dîner"
+        ]
+      ]
+    },
+    "bp": {
+      "intro": "Pour la tension, l'approche DASH fonctionne : peu de sel, beaucoup de légumes, fruits, légumineuses et laitages allégés — avec un cardio modéré régulier.",
+      "day": [
+        [
+          "Petit-déjeuner",
+          "Flocons d'avoine, banane et lait demi-écrémé"
+        ],
+        [
+          "Déjeuner",
+          "Poulet maison, épinards et pomme de terre au four — sans sel ajouté"
+        ],
+        [
+          "Collation",
+          "Un fruit et quelques amandes non salées"
+        ],
+        [
+          "Dîner",
+          "Soupe maison de haricots et légumes peu salée, et un yaourt nature"
+        ]
+      ],
+      "moves": [
+        [
+          "La plupart des jours",
+          "30 minutes de marche rapide ou de vélo"
+        ],
+        [
+          "2 jours par semaine",
+          "Renforcement léger — respirez régulièrement, sans charges lourdes"
+        ],
+        [
+          "Chaque soir",
+          "10 minutes d'étirements et de respiration lente"
+        ]
+      ]
+    },
+    "chol": {
+      "intro": "Pour améliorer le cholestérol, remplacez les graisses saturées par l'huile d'olive, les noix et le poisson, ajoutez des fibres solubles — et 150 minutes d'activité par semaine.",
+      "day": [
+        [
+          "Petit-déjeuner",
+          "Flocons d'avoine, pomme râpée et noix"
+        ],
+        [
+          "Déjeuner",
+          "Lentilles ou haricots avec légumes et un filet d'huile d'olive"
+        ],
+        [
+          "Collation",
+          "Une poignée d'amandes"
+        ],
+        [
+          "Dîner",
+          "Poisson au four, légumes rôtis et un demi-avocat"
+        ]
+      ],
+      "moves": [
+        [
+          "5 jours par semaine",
+          "30 minutes de marche rapide ou de vélo"
+        ],
+        [
+          "2 jours par semaine",
+          "20 minutes de renforcement musculaire"
+        ],
+        [
+          "Après le repas principal",
+          "15 minutes de marche"
+        ]
+      ]
+    },
+    "thyroid": {
+      "intro": "En cas de problème de thyroïde, visez des repas équilibrés et variés, avec assez de protéines, des légumes cuits et du poisson — et reprenez le sport en douceur.",
+      "day": [
+        [
+          "Petit-déjeuner",
+          "Œufs, pain complet et un fruit"
+        ],
+        [
+          "Déjeuner",
+          "Poisson, légumes cuits et riz"
+        ],
+        [
+          "Collation",
+          "Yaourt nature et une petite poignée de noix"
+        ],
+        [
+          "Dîner",
+          "Poulet, légumes cuits et pommes de terre"
+        ]
+      ],
+      "moves": [
+        [
+          "Chaque jour",
+          "20 minutes de marche, idéalement le matin pour l'énergie"
+        ],
+        [
+          "2 jours par semaine",
+          "Renforcement léger pour garder vos muscles"
+        ],
+        [
+          "Chaque soir",
+          "10 minutes d'étirements"
+        ]
+      ]
+    }
+  };
+
+  return { COACH, CONDITIONS, FOODS, MENU, EXERCISES, WEEK_PLAN, EXERCISE_WARNINGS, LESSONS, DAILY_CHECKS, GENERAL_TIPS };
 })();

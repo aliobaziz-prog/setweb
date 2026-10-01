@@ -168,6 +168,19 @@ const STR = {
     "src.intro": "Food advice in this app is based on these public healthy-eating guidelines:",
     "src.ai": "Photo nutrient estimates: Claude AI (Anthropic)",
     "disclaimer": "⚠️ Vital 40+ gives general nutrition information to support healthy eating. It is not a medical device and does not diagnose, treat or replace advice from your doctor or dietitian. If you have a medical condition, follow your care team's plan.",
+
+    "nav.plan": "My plan",
+    "plan.title": "🗣️ My eating & exercise plan",
+    "plan.intro": "Choose a health focus to see — or hear — what to eat, what to limit, and the exercise that goes with your meals.",
+    "plan.heading": "Plan for {c}",
+    "plan.eat": "✅ Eat more of",
+    "plan.limit": "⚖️ Limit",
+    "plan.avoid": "⏸️ Keep occasional",
+    "plan.day": "🍽️ A day of eating",
+    "plan.moves": "🏃 Exercise that matches your meals",
+    "voice.listen": "🔊 Listen",
+    "voice.stop": "⏹️ Stop",
+    "voice.novoice": "Your device has no voice for this language — add one in your phone's text-to-speech settings.",
   },
 
   fr: {
@@ -325,6 +338,19 @@ const STR = {
     "src.intro": "Les conseils alimentaires de cette app s'appuient sur ces recommandations publiques :",
     "src.ai": "Estimation des nutriments par photo : IA Claude (Anthropic)",
     "disclaimer": "⚠️ Vital 40+ fournit des informations nutritionnelles générales pour aider à mieux manger. Ce n'est pas un dispositif médical : il ne diagnostique ni ne traite et ne remplace pas l'avis de votre médecin ou diététicien. Si vous avez une maladie, suivez le plan de votre équipe soignante.",
+
+    "nav.plan": "Programme",
+    "plan.title": "🗣️ Mon programme repas & activité",
+    "plan.intro": "Choisissez un objectif santé pour voir — ou écouter — quoi manger, quoi limiter, et l'activité qui accompagne vos repas.",
+    "plan.heading": "Programme {c}",
+    "plan.eat": "✅ À privilégier",
+    "plan.limit": "⚖️ À limiter",
+    "plan.avoid": "⏸️ Plutôt occasionnel",
+    "plan.day": "🍽️ Une journée type",
+    "plan.moves": "🏃 L'activité qui accompagne vos repas",
+    "voice.listen": "🔊 Écouter",
+    "voice.stop": "⏹️ Arrêter",
+    "voice.novoice": "Votre appareil n'a pas de voix pour cette langue — ajoutez-en une dans les réglages de synthèse vocale du téléphone.",
   },
 
   ar: {
@@ -482,6 +508,19 @@ const STR = {
     "src.intro": "نصائح الأكل في هذا التطبيق مبنية على هذه التوصيات العامة:",
     "src.ai": "تقدير المغذيات من الصور: الذكاء الاصطناعي Claude (Anthropic)",
     "disclaimer": "⚠️ يقدّم Vital 40+ معلومات غذائية عامة تساعد على الأكل الصحي. ليس جهازًا طبيًا، ولا يشخّص ولا يعالج ولا يغني عن طبيبك أو أخصائي التغذية. إن كان عندك مرض فاتّبع خطة فريقك الطبي.",
+
+    "nav.plan": "برنامجي",
+    "plan.title": "🗣️ برنامج أكلي ورياضتي",
+    "plan.intro": "اختر هدفك الصحي لتقرأ أو تسمع: ماذا تأكل، ماذا تقلّل، والرياضة المناسبة مع وجباتك.",
+    "plan.heading": "برنامج {c}",
+    "plan.eat": "✅ كُل أكثر من",
+    "plan.limit": "⚖️ قلّل من",
+    "plan.avoid": "⏸️ أحيانًا فقط",
+    "plan.day": "🍽️ يوم أكل نموذجي",
+    "plan.moves": "🏃 الرياضة المناسبة مع وجباتك",
+    "voice.listen": "🔊 استمع",
+    "voice.stop": "⏹️ أوقف",
+    "voice.novoice": "لا يوجد صوت لهذه اللغة في جهازك — أضفه من إعدادات تحويل النص إلى كلام في الهاتف.",
   },
 };
 

@@ -186,3 +186,11 @@ label.btn.alt { color: var(--brand); }
 .mealsum p { margin: 4px 0 0; }
 .conf-high { --c: var(--good); } .conf-medium { --c: var(--limit); } .conf-low { --c: var(--avoid); }
 .analysis .btnrow select { flex: 1; margin-top: 8px; }
+
+/* ---------- v5: plan & voice ---------- */
+.btn.listen { margin-top: 8px; }
+.planhead p { margin: 4px 0; }
+.plansec { border-inline-start: 5px solid var(--c); }
+.planfoods { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px 12px; }
+.planfoods li { display: flex; gap: 8px; align-items: flex-start; font-size: .92rem; }
+.tabs button { min-width: 0; }

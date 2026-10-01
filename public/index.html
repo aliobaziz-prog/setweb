@@ -37,6 +37,15 @@
       <div id="home-extra"></div>
     </section>
 
+    <section id="tab-plan" class="tab">
+      <div class="card">
+        <h2 data-i18n="plan.title"></h2>
+        <p class="small" data-i18n="plan.intro"></p>
+        <div id="plan-chips" class="chips"></div>
+      </div>
+      <div id="plan-body"></div>
+    </section>
+
     <section id="tab-food" class="tab">
       <nav class="subnav" data-tab="food">
         <button data-s="diary" class="on" data-i18n="sub.diary"></button>
@@ -178,6 +187,7 @@
 
   <nav class="tabs">
     <button data-t="home" class="on"><span>📷</span><i data-i18n="nav.home"></i></button>
+    <button data-t="plan"><span>🗣️</span><i data-i18n="nav.plan"></i></button>
     <button data-t="food"><span>🍎</span><i data-i18n="nav.food"></i></button>
     <button data-t="habits"><span>🏃</span><i data-i18n="nav.habits"></i></button>
     <button data-t="more"><span>☰</span><i data-i18n="nav.more"></i></button>
@@ -194,6 +204,8 @@
   <script src="food-views.js"></script>
   <script src="habits.js"></script>
   <script src="more-views.js"></script>
+  <script src="voice.js"></script>
+  <script src="plan.js"></script>
   <script src="advice.js"></script>
   <script src="scan.js"></script>
 </body>
