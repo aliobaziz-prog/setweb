@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>صحتي بعد الأربعين</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>🥗 صحتي بعد الأربعين</h1>
+    <p>أكلك ورياضتك لحماية قلبك وسكرك</p>
+  </header>
+
+  <main id="app">
+    <section id="tab-home" class="tab active">
+      <div class="card">
+        <h2>ملفي الصحي</h2>
+        <div class="grid">
+          <label>العمر <input id="age" type="number" min="18" max="100" inputmode="numeric"></label>
+          <label>الجنس
+            <select id="sex"><option value="m">رجل</option><option value="f">امرأة</option></select>
+          </label>
+          <label>الوزن (كغ) <input id="weight" type="number" min="30" max="300" step="0.1" inputmode="decimal"></label>
+          <label>الطول (سم) <input id="height" type="number" min="100" max="230" inputmode="numeric"></label>
+        </div>
+        <h3>أشكو من (اختر ما ينطبق عليك)</h3>
+        <div id="conditions" class="chips"></div>
+        <div id="bmi" class="bmi"></div>
+        <button id="save" class="btn">حفظ ومتابعة ←</button>
+      </div>
+
+      <div id="tips" class="card"></div>
+
+      <div class="card">
+        <h2>أرقام مرجعية للتحاليل</h2>
+        <table><tbody id="ref"></tbody></table>
+        <p class="small">أرقام عامة للتوعية فقط، وطبيبك يحدد هدفك الشخصي.</p>
+      </div>
+    </section>
+
+    <section id="tab-food" class="tab">
+      <div class="card">
+        <h2>ماذا آكل؟</h2>
+        <p class="small" id="food-hint"></p>
+        <div class="filters" id="food-filters">
+          <button data-f="all" class="on">الكل</button>
+          <button data-f="good">✅ كُل</button>
+          <button data-f="limit">⚠️ بحذر</button>
+          <button data-f="avoid">⛔ تجنّب</button>
+        </div>
+        <ul id="food-list" class="foods"></ul>
+      </div>
+      <div class="card">
+        <h2>طبق الصحة 🍽️</h2>
+        <div class="plate">
+          <div class="p1">½ خضر وسلطة</div>
+          <div class="p2">¼ بروتين (سمك، دجاج، بقوليات)</div>
+          <div class="p3">¼ نشويات كاملة</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-menu" class="tab">
+      <div class="card">
+        <h2>مقترحات وجبات اليوم</h2>
+        <div id="menu"></div>
+        <button id="shuffle" class="btn alt">🔀 اقتراح آخر</button>
+      </div>
+    </section>
+
+    <section id="tab-sport" class="tab">
+      <div class="card">
+        <h2>برنامج الأسبوع</h2>
+        <table><tbody id="week"></tbody></table>
+      </div>
+      <div id="sport-warn" class="card warn"></div>
+      <div id="sport-list"></div>
+    </section>
+
+    <section id="tab-track" class="tab">
+      <div class="card">
+        <h2>أهداف اليوم</h2>
+        <ul id="checks" class="checks"></ul>
+        <div class="progress"><div id="bar"></div></div>
+        <p id="streak" class="small"></p>
+      </div>
+      <div class="card">
+        <h2>قياساتي</h2>
+        <form id="mform" class="grid">
+          <label>النوع
+            <select id="mtype">
+              <option value="sugar">سكر (غ/ل)</option>
+              <option value="sys">ضغط انقباضي</option>
+              <option value="dia">ضغط انبساطي</option>
+              <option value="weight">وزن (كغ)</option>
+              <option value="chol">كوليسترول (غ/ل)</option>
+              <option value="trig">تريغليسريد (غ/ل)</option>
+            </select>
+          </label>
+          <label>القيمة <input id="mval" type="number" step="0.01" inputmode="decimal" required></label>
+          <button class="btn" type="submit">إضافة</button>
+        </form>
+        <ul id="mlist" class="mlist"></ul>
+      </div>
+    </section>
+
+    <p class="disclaimer">⚠️ هذا التطبيق للتوعية والإرشاد العام ولا يغني عن استشارة الطبيب أو أخصائي التغذية. لا توقف دواءك ولا تغيّر جرعته بدون طبيبك.</p>
+  </main>
+
+  <nav class="tabs">
+    <button data-t="home" class="on"><span>🏠</span>ملفي</button>
+    <button data-t="food"><span>🍎</span>الأكل</button>
+    <button data-t="menu"><span>🍽️</span>وجباتي</button>
+    <button data-t="sport"><span>🏃</span>الرياضة</button>
+    <button data-t="track"><span>📈</span>متابعتي</button>
+  </nav>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
