@@ -1,3 +1,4 @@
+[hidden] { display: none !important; }
 :root {
   --bg: #f4f7f6;
   --card: #fff;
@@ -18,7 +19,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.6 "Segoe UI", Tahoma, "Noto Naskh Arabic", sans-serif;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Naskh Arabic", Tahoma, sans-serif;
   padding-bottom: 76px;
 }
 .top { background: linear-gradient(135deg, #0f766e, #115e59); color: #fff; padding: 18px 16px; text-align: center; }
@@ -149,3 +150,15 @@ dialog input[type=search], dialog input[type=text], dialog label input { width: 
   body { padding: 0; background: #fff; color: #000; }
   .card { border: 0; }
 }
+
+/* ---------- v3: i18n & data ---------- */
+.topbar { display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
+#lang-sel { position: absolute; inset-inline-end: 0; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.4); border-radius: 8px; padding: 4px 6px; font-size: .8rem; }
+#lang-sel option { color: #000; }
+@media (max-width: 480px) { .topbar { justify-content: flex-start; } .top { text-align: start; } }
+.tabs i { font-style: normal; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+.btnrow .btn { margin-top: 8px; }
+.filebtn { display: inline-flex; flex-direction: row; font-size: 1rem; color: var(--brand); cursor: pointer; }
+.btn.danger { background: var(--avoid); }
+@media (prefers-color-scheme: dark) { .btn.danger { color: #fff; } }

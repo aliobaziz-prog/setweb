@@ -1,37 +1,40 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0f766e">
-  <title>صحتي بعد الأربعين</title>
+  <meta name="description" content="Vital 40+ — food diary, blood sugar, blood pressure and cholesterol tracker for adults over 40. Private: your data stays on your device.">
+  <title>Vital 40+</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="top">
-    <h1>🥗 صحتي بعد الأربعين</h1>
-    <p>أكلك، قياساتك، ورياضتك في مكان واحد</p>
+    <div class="topbar">
+      <h1 data-i18n="app.name">Vital 40+</h1>
+      <select id="lang-sel" aria-label="Language"></select>
+    </div>
+    <p data-i18n="app.tagline"></p>
   </header>
 
   <main id="app">
-    <!-- الرئيسية -->
     <section id="tab-home" class="tab active"><div id="home"></div></section>
 
-    <!-- الأكل -->
     <section id="tab-food" class="tab">
       <nav class="subnav" data-tab="food">
-        <button data-s="diary" class="on">📓 يومياتي</button>
-        <button data-s="guide">🍎 ماذا آكل؟</button>
-        <button data-s="menu">🍽️ وجبات</button>
+        <button data-s="diary" class="on" data-i18n="sub.diary"></button>
+        <button data-s="guide" data-i18n="sub.guide"></button>
+        <button data-s="menu" data-i18n="sub.menu"></button>
       </nav>
       <div class="sub active" id="sub-food-diary">
         <div class="card">
           <div class="datenav">
-            <button id="dd-prev" type="button" aria-label="اليوم السابق">›</button>
+            <button id="dd-prev" type="button" data-i18n-aria="diary.prev"></button>
             <b id="dd-label"></b>
-            <button id="dd-next" type="button" aria-label="اليوم التالي">‹</button>
+            <button id="dd-next" type="button" data-i18n-aria="diary.next"></button>
           </div>
           <div id="diary-meters" class="meters"></div>
         </div>
@@ -41,56 +44,57 @@
       <div class="sub" id="sub-food-guide">
         <div id="guide-tips" class="card"></div>
         <div class="card">
-          <h2>ماذا آكل؟</h2>
+          <h2 data-i18n="guide.title"></h2>
           <div class="filters" id="food-filters">
-            <button data-f="all" class="on">الكل</button>
-            <button data-f="good">✅ كُل</button>
-            <button data-f="limit">⚠️ بحذر</button>
-            <button data-f="avoid">⛔ تجنّب</button>
+            <button data-f="all" class="on" data-i18n="filter.all"></button>
+            <button data-f="good" data-i18n="filter.good"></button>
+            <button data-f="limit" data-i18n="filter.limit"></button>
+            <button data-f="avoid" data-i18n="filter.avoid"></button>
           </div>
           <ul id="food-list" class="foods"></ul>
         </div>
         <div class="card">
-          <h2>طبق الصحة 🍽️</h2>
+          <h2 data-i18n="plate.title"></h2>
           <div class="plate">
-            <div class="p1">½ خضر وسلطة</div>
-            <div class="p2">¼ بروتين (سمك، دجاج، بقوليات)</div>
-            <div class="p3">¼ نشويات كاملة</div>
+            <div class="p1" data-i18n="plate.p1"></div>
+            <div class="p2" data-i18n="plate.p2"></div>
+            <div class="p3" data-i18n="plate.p3"></div>
           </div>
         </div>
       </div>
       <div class="sub" id="sub-food-menu">
         <div class="card">
-          <h2>مقترحات وجبات اليوم</h2>
+          <h2 data-i18n="menu.title"></h2>
           <div id="menu"></div>
-          <button id="shuffle" class="btn alt" type="button">🔀 اقتراح آخر</button>
+          <button id="shuffle" class="btn alt" type="button" data-i18n="menu.shuffle"></button>
         </div>
       </div>
     </section>
 
-    <!-- القياسات -->
     <section id="tab-track" class="tab">
       <nav class="subnav" data-tab="track">
-        <button data-s="readings" class="on">📈 القياسات والتحاليل</button>
-        <button data-s="goals">✅ أهداف اليوم</button>
+        <button data-s="readings" class="on" data-i18n="sub.readings"></button>
+        <button data-s="goals" data-i18n="sub.goals"></button>
       </nav>
       <div class="sub active" id="sub-track-readings">
         <form id="rform" class="card">
-          <h2>تسجيل قياس أو تحليل</h2>
+          <h2 data-i18n="rform.title"></h2>
           <div class="grid">
-            <label><span>النوع</span><select id="rtype"></select></label>
-            <label id="l-ctx"><span>الحالة</span>
+            <label><span data-i18n="rform.type"></span><select id="rtype"></select></label>
+            <label id="l-ctx"><span data-i18n="rform.ctx"></span>
               <select id="rctx">
-                <option value="fasting">صائم</option><option value="before">قبل الأكل</option>
-                <option value="after">بعد الأكل بساعتين</option><option value="bed">قبل النوم</option>
-                <option value="random">عشوائي</option>
+                <option value="fasting" data-i18n="ctx.fasting"></option>
+                <option value="before" data-i18n="ctx.before"></option>
+                <option value="after" data-i18n="ctx.after"></option>
+                <option value="bed" data-i18n="ctx.bed"></option>
+                <option value="random" data-i18n="ctx.random"></option>
               </select></label>
-            <label><span id="lv-t">القيمة</span><input id="rv" type="number" step="any" inputmode="decimal" required></label>
-            <label id="l-v2" hidden><span>الانبساطي (الصغير)</span><input id="rv2" type="number" inputmode="numeric"></label>
-            <label id="l-pulse" hidden><span>النبض (اختياري)</span><input id="rpulse" type="number" inputmode="numeric"></label>
-            <label><span>التاريخ</span><input id="rdate" type="date"></label>
+            <label><span id="lv-t"></span><input id="rv" type="number" step="any" inputmode="decimal" required></label>
+            <label id="l-v2" hidden><span data-i18n="rform.dia"></span><input id="rv2" type="number" inputmode="numeric"></label>
+            <label id="l-pulse" hidden><span data-i18n="rform.pulse"></span><input id="rpulse" type="number" inputmode="numeric"></label>
+            <label><span data-i18n="rform.date"></span><input id="rdate" type="date"></label>
           </div>
-          <button class="btn" type="submit">حفظ</button>
+          <button class="btn" type="submit" data-i18n="btn.save"></button>
           <p id="rmsg" class="small" aria-live="polite"></p>
         </form>
         <div id="rchips" class="chips"></div>
@@ -98,7 +102,7 @@
       </div>
       <div class="sub" id="sub-track-goals">
         <div class="card">
-          <h2>أهداف اليوم</h2>
+          <h2 data-i18n="goals.title"></h2>
           <ul id="checks" class="checks"></ul>
           <div class="progress"><div id="bar"></div></div>
           <p id="streak" class="small"></p>
@@ -106,116 +110,152 @@
       </div>
     </section>
 
-    <!-- الرياضة -->
     <section id="tab-sport" class="tab">
       <div class="card">
-        <h2>برنامج الأسبوع</h2>
+        <h2 data-i18n="sport.week"></h2>
         <table><tbody id="week"></tbody></table>
       </div>
       <div id="sport-warn" class="card warn"></div>
       <div id="sport-list"></div>
     </section>
 
-    <!-- المزيد -->
     <section id="tab-more" class="tab">
       <nav class="subnav" data-tab="more">
-        <button data-s="profile" class="on">👤 ملفي</button>
-        <button data-s="risk">🎯 اختبار الخطر</button>
-        <button data-s="meds">💊 أدويتي</button>
-        <button data-s="ramadan">🌙 رمضان</button>
-        <button data-s="report">📄 تقرير الطبيب</button>
+        <button data-s="profile" class="on" data-i18n="sub.profile"></button>
+        <button data-s="risk" data-i18n="sub.risk"></button>
+        <button data-s="meds" data-i18n="sub.meds"></button>
+        <button data-s="report" data-i18n="sub.report"></button>
+        <button data-s="ramadan" data-i18n="sub.fasting"></button>
+        <button data-s="data" data-i18n="sub.data"></button>
       </nav>
 
       <div class="sub active" id="sub-more-profile">
         <div class="card">
-          <h2>ملفي الصحي</h2>
+          <h2 data-i18n="profile.title"></h2>
           <div class="grid">
-            <label><span>العمر</span><input id="p-age" type="number" min="18" max="100" inputmode="numeric"></label>
-            <label><span>الجنس</span><select id="p-sex"><option value="m">رجل</option><option value="f">امرأة</option></select></label>
-            <label><span>الوزن (كغ)</span><input id="p-weight" type="number" min="30" max="300" step="0.1" inputmode="decimal"></label>
-            <label><span>الطول (سم)</span><input id="p-height" type="number" min="100" max="230" inputmode="numeric"></label>
-            <label><span>محيط الخصر (سم)</span><input id="p-waist" type="number" min="40" max="200" inputmode="numeric"></label>
-            <label><span>النشاط</span>
-              <select id="p-activity"><option value="low">قليل</option><option value="mid">متوسط</option><option value="high">عالٍ</option></select></label>
-            <label><span>الهدف</span>
-              <select id="p-goal"><option value="keep">ثبات الوزن</option><option value="lose">خسارة الوزن</option></select></label>
-            <label><span>وحدة التحاليل</span>
-              <select id="p-units"><option value="gl">غ/ل</option><option value="mgdl">مغ/دل</option></select></label>
+            <label><span data-i18n="p.age"></span><input id="p-age" type="number" min="18" max="100" inputmode="numeric"></label>
+            <label><span data-i18n="p.sex"></span><select id="p-sex"><option value="m" data-i18n="sex.m"></option><option value="f" data-i18n="sex.f"></option></select></label>
+            <label><span id="lbl-weight"></span><input id="p-weight" type="number" min="20" max="700" step="0.1" inputmode="decimal"></label>
+            <label><span id="lbl-height"></span><input id="p-height" type="number" min="30" max="250" step="0.1" inputmode="decimal"></label>
+            <label><span id="lbl-waist"></span><input id="p-waist" type="number" min="15" max="200" step="0.1" inputmode="decimal"></label>
+            <label><span data-i18n="p.activity"></span>
+              <select id="p-activity"><option value="low" data-i18n="act.low"></option><option value="mid" data-i18n="act.mid"></option><option value="high" data-i18n="act.high"></option></select></label>
+            <label><span data-i18n="p.goal"></span>
+              <select id="p-goal"><option value="keep" data-i18n="goal.keep"></option><option value="lose" data-i18n="goal.lose"></option></select></label>
+            <label><span data-i18n="p.units"></span>
+              <select id="p-units"><option value="mgdl" data-i18n="u.mgdl"></option><option value="mmol" data-i18n="u.mmol"></option><option value="gl" data-i18n="u.gl"></option></select></label>
+            <label><span data-i18n="p.system"></span>
+              <select id="p-system"><option value="metric" data-i18n="sys.metric"></option><option value="imperial" data-i18n="sys.imperial"></option></select></label>
           </div>
-          <h3>أشكو من (اختر ما ينطبق عليك)</h3>
+          <h3 data-i18n="cond.title"></h3>
           <div id="conditions" class="chips"></div>
           <div id="bmi" class="bmi"></div>
         </div>
         <div class="card">
-          <h2>أهدافك اليومية المحسوبة</h2>
+          <h2 data-i18n="targets.title"></h2>
           <ul id="targets" class="kv"></ul>
-          <p class="small">تُحسب من عمرك ووزنك ونشاطك وحالتك. للتوعية فقط.</p>
+          <p class="small" data-i18n="targets.note"></p>
         </div>
         <div class="card">
-          <h2>أرقام مرجعية للتحاليل</h2>
+          <h2 data-i18n="ref.title"></h2>
           <table><tbody id="ref"></tbody></table>
-          <p class="small">أرقام عامة، وطبيبك يحدد هدفك الشخصي.</p>
+          <p class="small" data-i18n="ref.note"></p>
         </div>
       </div>
 
       <div class="sub" id="sub-more-risk">
         <div class="card">
-          <h2>اختبار خطر السكري من النوع 2</h2>
-          <p class="small">يستعمل عمرك ووزنك وخصرك من «ملفي» + الأسئلة التالية (اختبار FINDRISC).</p>
+          <h2 data-i18n="risk.title"></h2>
+          <p class="small" data-i18n="risk.intro"></p>
           <div class="grid one">
-            <label><span>نشاط بدني 30 دقيقة يوميًا؟</span><select id="r-act"></select></label>
-            <label><span>خضر وفواكه</span><select id="r-veg"></select></label>
-            <label><span>تتناول دواء لضغط الدم؟</span><select id="r-meds"></select></label>
-            <label><span>سكر مرتفع سابقًا؟</span><select id="r-hg"></select></label>
-            <label><span>إصابات سكري في العائلة</span><select id="r-fam"></select></label>
+            <label><span data-i18n="r.act"></span><select id="r-act"></select></label>
+            <label><span data-i18n="r.veg"></span><select id="r-veg"></select></label>
+            <label><span data-i18n="r.meds"></span><select id="r-meds"></select></label>
+            <label><span data-i18n="r.hg"></span><select id="r-hg"></select></label>
+            <label><span data-i18n="r.fam"></span><select id="r-fam"></select></label>
           </div>
-          <button id="risk-go" class="btn" type="button">احسب خطري</button>
-          <div id="risk-out" class="risk"></div>
+          <button id="risk-go" class="btn" type="button" data-i18n="risk.go"></button>
+          <div id="risk-out" class="risk" aria-live="polite"></div>
         </div>
       </div>
 
       <div class="sub" id="sub-more-meds">
         <form id="mform" class="card">
-          <h2>أدويتي</h2>
+          <h2 data-i18n="meds.title"></h2>
           <div class="grid">
-            <label><span>اسم الدواء</span><input id="m-name" type="text" required></label>
-            <label><span>الجرعة (اختياري)</span><input id="m-dose" type="text"></label>
-            <label><span>الوقت</span><input id="m-time" type="time" value="08:00"></label>
+            <label><span data-i18n="m.name"></span><input id="m-name" type="text" maxlength="60" required></label>
+            <label><span data-i18n="m.dose"></span><input id="m-dose" type="text" maxlength="40"></label>
+            <label><span data-i18n="m.time"></span><input id="m-time" type="time" value="08:00"></label>
           </div>
-          <button class="btn" type="submit">إضافة</button>
-          <button id="notif-btn" class="btn alt" type="button" hidden>🔔 تفعيل الإشعارات</button>
-          <p class="small">التذكير يعمل والتطبيق مفتوح؛ ويظهر في «الرئيسية» عند حلول الموعد.</p>
+          <button class="btn" type="submit" data-i18n="btn.add"></button>
+          <button id="notif-btn" class="btn alt" type="button" hidden data-i18n="meds.notifbtn"></button>
+          <p class="small" data-i18n="meds.note"></p>
         </form>
         <div class="card">
-          <h2>اليوم</h2>
+          <h2 data-i18n="meds.today"></h2>
           <ul id="medlist" class="mlist"></ul>
         </div>
       </div>
 
-      <div class="sub" id="sub-more-ramadan"><div id="ramadan"></div></div>
-
       <div class="sub" id="sub-more-report">
         <div class="card" id="report"></div>
-        <button id="print-btn" class="btn no-print" type="button">🖨️ طباعة / حفظ PDF</button>
+        <button id="print-btn" class="btn no-print" type="button" data-i18n="rep.print"></button>
+      </div>
+
+      <div class="sub" id="sub-more-ramadan">
+        <p class="small" data-i18n="fast.intro"></p>
+        <div id="ramadan"></div>
+      </div>
+
+      <div class="sub" id="sub-more-data">
+        <div class="card">
+          <h2 data-i18n="data.title"></h2>
+          <ul>
+            <li data-i18n="data.p1"></li>
+            <li data-i18n="data.p2"></li>
+            <li data-i18n="data.p3"></li>
+          </ul>
+          <div class="btnrow">
+            <button id="export-btn" class="btn" type="button" data-i18n="data.export"></button>
+            <label class="btn alt filebtn"><span data-i18n="data.import"></span><input id="import-file" type="file" accept="application/json,.json" hidden></label>
+            <button id="wipe-btn" class="btn danger" type="button" data-i18n="data.wipe"></button>
+          </div>
+          <p id="data-msg" class="small" aria-live="polite"></p>
+        </div>
+        <div class="card">
+          <h2 data-i18n="src.title"></h2>
+          <p class="small" data-i18n="src.intro"></p>
+          <ul class="small">
+            <li>American Diabetes Association — Standards of Care in Diabetes</li>
+            <li>ACC/AHA — Guideline for High Blood Pressure in Adults; Guideline on the Management of Blood Cholesterol</li>
+            <li>ESC/EAS — Guidelines for the Management of Dyslipidaemias</li>
+            <li>WHO — Guidelines on sodium and sugars intake</li>
+            <li>FINDRISC — Finnish Diabetes Risk Score (Lindström &amp; Tuomilehto, Diabetes Care 2003)</li>
+            <li>IDF-DAR — Diabetes and Ramadan Practical Guidelines</li>
+            <li>USDA FoodData Central — nutrient values (approximate)</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <p class="disclaimer">⚠️ هذا التطبيق للتوعية والإرشاد العام ولا يغني عن استشارة الطبيب أو أخصائي التغذية. لا توقف دواءك ولا تغيّر جرعته بدون طبيبك. في حالات الطوارئ اتصل بالإسعاف.</p>
+    <p class="disclaimer" data-i18n="disclaimer"></p>
   </main>
 
   <nav class="tabs">
-    <button data-t="home" class="on"><span>🏠</span>الرئيسية</button>
-    <button data-t="food"><span>🍎</span>الأكل</button>
-    <button data-t="track"><span>📈</span>القياسات</button>
-    <button data-t="sport"><span>🏃</span>الرياضة</button>
-    <button data-t="more"><span>☰</span>المزيد</button>
+    <button data-t="home" class="on"><span>🏠</span><i data-i18n="nav.home"></i></button>
+    <button data-t="food"><span>🍎</span><i data-i18n="nav.food"></i></button>
+    <button data-t="track"><span>📈</span><i data-i18n="nav.track"></i></button>
+    <button data-t="sport"><span>🏃</span><i data-i18n="nav.sport"></i></button>
+    <button data-t="more"><span>☰</span><i data-i18n="nav.more"></i></button>
   </nav>
 
   <dialog id="dlg"><div id="dlg-body"></div></dialog>
 
-  <script src="data.js"></script>
+  <script src="i18n.js"></script>
+  <script src="content-en.js"></script>
+  <script src="content-fr.js"></script>
+  <script src="content-ar.js"></script>
   <script src="foods.js"></script>
-  <script src="extra.js"></script>
   <script src="core.js"></script>
   <script src="food-views.js"></script>
   <script src="track-views.js"></script>
